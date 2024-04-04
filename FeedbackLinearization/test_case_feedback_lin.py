@@ -1,5 +1,5 @@
 import sympy as sym
-from input_state_linearizable_check import InputStateLinearizableCheck
+from feedback_linearization import FeedbackLinearization
 
 x1, x2, x3, x4 = sym.symbols('x1, x2, x3, x4')
 k, I, J, M, g, L = sym.symbols('k, I, J, M, g, L')
@@ -12,7 +12,7 @@ states = sym.Matrix([x1, x2, x3, x4])
 
 n = 4
 
-input_linearizer = InputStateLinearizableCheck(f, g, n, states)
+input_linearizer = FeedbackLinearization(f, g, n, states)
 # lie_bracket = input_linearizer.liebracket(1)
 # print(lie_bracket)
 

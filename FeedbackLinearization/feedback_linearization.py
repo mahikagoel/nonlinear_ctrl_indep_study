@@ -1,7 +1,7 @@
 # CLASS TO DETERMINE IF SYSTEM IS INPUT STATE LINEARIZABLE
 import sympy as sym
 
-class InputStateLinearizableCheck:
+class FeedbackLinearization:
 
     def __init__(self, f, g, n, state):
         self.f = f # f dynamics matrix
@@ -23,14 +23,15 @@ class InputStateLinearizableCheck:
 
     def vector_field(self):
         for i in range(self.n):
-            self.vfield[:, i] = self.liebracket(self.f, self.g, i)
+            lb = self.liebracket(self.f, self.g, i)
+            self.vfield[:, i] = lb
         return self.vfield
 
     def input_state_linearizable_check(self):
         controllability_bool = False
         involutive_bool = False
 
-        print(self.vector_field())
+        # print(self.vector_field())
 
         vfield = sym.Matrix(self.vfield)
         rank = vfield.rank()
@@ -38,7 +39,9 @@ class InputStateLinearizableCheck:
         if (rank == self.n):
             controllability_bool = True
 
-        # return controllability_bool*involutive_bool
+        # return controllability_bool and involutive_bool
         return controllability_bool
+    
+
 
 
